@@ -19,6 +19,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+interface ApiError {
+  data?: {
+    errors?: { message: string }[];
+  };
+}
+
 export function LoginForm() {
   const [formData, setFormData] = useState({
     email: "",
@@ -82,12 +88,10 @@ export function LoginForm() {
 
     try {
       await signIn(formData).unwrap();
-    } catch (err: any) {
-      if (err?.data?.errors) {
-        const apiErrors = err.data.errors;
-        const errorMessage =
-          apiErrors[0]?.message || "An error occurred during sign in";
-        setApiError(errorMessage);
+    } catch (err: unknown) {
+      const apiError = err as ApiError;
+      if (apiError.data?.errors?.length) {
+        setApiError(apiError.data.errors[0].message);
       } else {
         setApiError("An unexpected error occurred. Please try again.");
       }
@@ -104,6 +108,7 @@ export function LoginForm() {
 
   useEffect(() => {
     if (isSuccess && data) {
+      //@ts-expect-error
       const { access_token, refresh_token, expires } = data.data;
 
       //localStorage
@@ -213,7 +218,7 @@ export function LoginForm() {
 
         <div className="pt-4 text-center">
           <p className=" text-gray-600 text-xs">
-            Don't have an account ?{" "}
+            Don&apos;t have an account?
             <a href="#" className="text-green-600 hover:underline font-medium">
               Signup now
             </a>
@@ -225,7 +230,7 @@ export function LoginForm() {
             2025© Somaliland Diaspora Engagement Platform
           </p>
           <p className="text-xs text-gray-500">
-            ❤️ Design & Develop by Tiggi Solutions
+            ❤️ Design & Develop by Tiigsi Solutions
           </p>
         </div>
       </CardContent>

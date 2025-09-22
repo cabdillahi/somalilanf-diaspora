@@ -3,7 +3,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-const events = [
+interface Event {
+  id: number;
+  title: string;
+  assignee: string;
+  status: Status;
+  priority: Priority;
+  dueDate: string;
+}
+
+const events: Event[] = [
   {
     id: 1,
     title: "Brand logo design",
@@ -38,12 +47,15 @@ const events = [
   },
 ];
 
-const statusColors: any = {
+type Status = "Active" | "Pending";
+type Priority = "high" | "medium" | "low";
+
+const statusColors: Record<Status, string> = {
   Active: "bg-green-100 text-green-800",
   Pending: "bg-yellow-100 text-yellow-800",
 };
 
-const priorityColors: any = {
+const priorityColors: Record<Priority, string> = {
   high: "text-red-500",
   medium: "text-yellow-500",
   low: "text-green-500",

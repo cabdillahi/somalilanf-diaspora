@@ -45,7 +45,7 @@ export function UpdateUpcomingeDialog({
 }: UpdateArticleDialogProps) {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  // const [_, setImageUrl] = useState("");
 
   const [updateArticle, { isLoading }] = useUpdateArticleMutation();
 
@@ -53,7 +53,7 @@ export function UpdateUpcomingeDialog({
     if (article) {
       setTitle(article.Title || "");
       setStatus(article.status);
-      setImageUrl(article.featured_image_url || "");
+      // setImageUrl(article.featured_image_url || "");
     }
   }, [article]);
 
@@ -66,7 +66,7 @@ export function UpdateUpcomingeDialog({
         id: article.id.toString(),
         data: {
           Title: title,
-          //@ts-ignore
+          // @ts-expect-error
           status,
         },
       }).unwrap();

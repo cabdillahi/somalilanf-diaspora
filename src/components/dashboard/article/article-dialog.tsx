@@ -63,9 +63,8 @@ export function ArticleDialog({ open, onOpenChange }: ArticleDialogProps) {
       onOpenChange(false);
       resetForm();
     } catch (err) {
-      //@ts-ignore
       const errorMessage =
-        //@ts-ignore
+        // @ts-expect-error
         err?.data?.errors?.[0]?.message || "Something went wrong ";
       toast.error(errorMessage);
     }

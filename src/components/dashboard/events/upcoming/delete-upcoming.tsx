@@ -9,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useDeleteArticleMutation } from "@/services/article/aritcle-api";
 import { useDeleteeventMutation } from "@/services/event/event-api";
 import { AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
@@ -55,8 +54,7 @@ export function DeleteUpcomingDialog({
             Delete upcoming
           </DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete "{article?.Title}"? This action
-            cannot be undone.
+            {`Are you sure you want to delete "${article?.Title}"? This action cannot be undone.`}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

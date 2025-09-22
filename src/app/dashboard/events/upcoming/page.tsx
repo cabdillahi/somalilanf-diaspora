@@ -6,15 +6,12 @@ import { useCallback, useState } from "react";
 
 export default function EventsPage() {
   const [searchValue, setSearchValue] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
 
   const handleSearchChange = useCallback((newSearch: string) => {
     setSearchValue(newSearch);
   }, []);
 
-  const handleStatusChange = useCallback((newStatus: string) => {
-    setStatusFilter(newStatus);
-  }, []);
+ 
 
   return (
     <div className="container mx-auto p-6 space-y-6">
@@ -27,12 +24,10 @@ export default function EventsPage() {
 
       <SearchFilterUpcoming
         onSearchChange={handleSearchChange}
-        onStatusFilter={handleStatusChange}
         searchValue={searchValue}
-        statusFilter={statusFilter}
       />
 
-      <UpcomingTable searchValue={searchValue} statusFilter={statusFilter} />
+      <UpcomingTable searchValue={searchValue}  />
     </div>
   );
 }

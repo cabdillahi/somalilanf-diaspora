@@ -41,11 +41,6 @@ const formatDate = (dateString: string) => {
   });
 };
 
-const truncateContent = (content: string, maxLength = 100) => {
-  if (content.length <= maxLength) return content;
-  return content.substring(0, maxLength) + "...";
-};
-
 interface ArticleTableProps {
   searchValue?: string;
   statusFilter?: string;
@@ -264,7 +259,7 @@ export function ArticleTable({
       </Card>
 
       <UpdateArticleDialog
-        //@ts-ignore
+        // @ts-expect-error
         article={selectedArticle}
         open={updateDialogOpen}
         onOpenChange={setUpdateDialogOpen}
@@ -272,7 +267,7 @@ export function ArticleTable({
       />
 
       <DeleteArticleDialog
-        //@ts-ignore
+        // @ts-expect-error
         article={selectedArticle}
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}

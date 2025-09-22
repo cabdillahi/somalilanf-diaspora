@@ -66,7 +66,7 @@ export function UpdateArticleDialog({
         id: article.id.toString(),
         data: {
           Title: title,
-          //@ts-ignore
+          // @ts-expect-error
           status,
         },
       }).unwrap();

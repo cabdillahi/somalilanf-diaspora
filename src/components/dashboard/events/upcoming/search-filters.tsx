@@ -13,7 +13,7 @@ interface SearchFilterUpcomingProps {
 export function SearchFilterUpcoming({
   onSearchChange,
   searchValue = "",
-}: SearchFilterUpcomingProps|any) {
+}: SearchFilterUpcomingProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (

@@ -1,7 +1,10 @@
 "use client";
 
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -10,15 +13,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle, Eye, Edit, Trash2 } from "lucide-react";
-import Image from "next/image";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useMemo, useState } from "react";
 import { useGeteventsQuery } from "@/services/event/event-api";
+import { AlertCircle, Edit, Trash2 } from "lucide-react";
+import Image from "next/image";
+import { useMemo, useState } from "react";
 import { DeleteUpcomingDialog } from "./delete-upcoming";
-import { UpdateUpcomingeDialog } from "./update-upcoming";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -46,6 +45,14 @@ interface ArticleTableProps {
   statusFilter?: string;
 }
 
+interface EventArticle {
+  id: number;
+  title: string;
+  location: string;
+  date_updated?: string;
+  image?: string | null;
+}
+
 export function UpcomingTable({
   searchValue = "",
   statusFilter = "all",
@@ -53,7 +60,7 @@ export function UpcomingTable({
   const { data, error, isLoading } = useGeteventsQuery();
   const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState<any>(null);
+  const [selectedArticle, setSelectedArticle] = useState<EventArticle>();
 
   const filteredEvents = useMemo(() => {
     if (!data?.data) return [];
@@ -265,6 +272,7 @@ export function UpcomingTable({
       /> */}
 
       <DeleteUpcomingDialog
+        //@ts-expect-error
         article={selectedArticle}
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
