@@ -1,10 +1,10 @@
+import Group from "@/components/dashboard/group/group";
 import React from "react";
-import AuthPage from "./auth/page";
 
 const page = () => {
   return (
     <div>
-      <AuthPage />
+      <Group />
     </div>
   );
 };
