@@ -1,17 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useCreateArticleMutation } from "@/services/article/aritcle-api";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import Image from "next/image";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface ArticleDialogProps {
@@ -63,9 +65,12 @@ export function ArticleDialog({ open, onOpenChange }: ArticleDialogProps) {
       onOpenChange(false);
       resetForm();
     } catch (err) {
+      const error = err as FetchBaseQueryError & {
+        data?: { errors?: { message?: string }[] };
+      };
+
       const errorMessage =
-        // @ts-expect-error
-        err?.data?.errors?.[0]?.message || "Something went wrong ";
+        error?.data?.errors?.[0]?.message || "Something went wrong";
       toast.error(errorMessage);
     }
   };
@@ -131,7 +136,7 @@ export function ArticleDialog({ open, onOpenChange }: ArticleDialogProps) {
               onChange={handleImageUpload}
             />
             {preview && (
-              <img
+              <Image
                 src={preview}
                 alt="Preview"
                 className="mt-2 h-32 w-full object-cover rounded-md"

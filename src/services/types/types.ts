@@ -1,6 +1,6 @@
 export interface Article {
   id: number;
-  status: "draft" | "published" | "archived";
+  status: "draft" | "published" | "archived" | string;
   sort: number | null;
   user_created: string;
   date_created: string;
@@ -36,6 +36,13 @@ export interface EventResponse {
   data: Events[];
 }
 
+export interface EventInput {
+  title: string;
+  description: string;
+  location: string;
+  start_date: string;
+  end_date: string;
+}
 
 export interface User {
   id: string;
@@ -49,6 +56,9 @@ export interface User {
   description: string;
   title: string;
   role: string;
+  access_token: string;
+  refresh_token: string;
+  expires:  number;
   last_access: string; // ISO date string
   expertise: string;
   coordinates: {

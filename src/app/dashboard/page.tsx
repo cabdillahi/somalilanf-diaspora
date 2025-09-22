@@ -1,5 +1,4 @@
 import { ActivityFeed } from "@/components/dashboard/home/activity-feed";
-import { DashboardHeader } from "@/components/dashboard/home/dashboard-header";
 import { GroupsAnalytics } from "@/components/dashboard/home/groups-analytics";
 import { PopularArticles } from "@/components/dashboard/home/popular-articles";
 import { StatsCards } from "@/components/dashboard/home/stats-cards";

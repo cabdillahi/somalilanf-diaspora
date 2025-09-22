@@ -66,13 +66,12 @@ export function UpdateUpcomingeDialog({
         id: article.id.toString(),
         data: {
           Title: title,
-          // @ts-expect-error
-          status,
         },
       }).unwrap();
       onOpenChange(false);
       onSuccess?.();
     } catch (error) {
+      console.log(error)
       toast.error("Failed to update article");
     }
   };

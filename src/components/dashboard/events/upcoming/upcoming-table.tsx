@@ -18,6 +18,7 @@ import { AlertCircle, Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { DeleteUpcomingDialog } from "./delete-upcoming";
+import { Article } from "@/services/types/types";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -40,6 +41,13 @@ const formatDate = (dateString: string) => {
   });
 };
 
+interface DeleteArticleDialogProps {
+  article: Event | null;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onSuccess: () => void;
+}
+
 interface ArticleTableProps {
   searchValue?: string;
   statusFilter?: string;
@@ -58,9 +66,11 @@ export function UpcomingTable({
   statusFilter = "all",
 }: ArticleTableProps) {
   const { data, error, isLoading } = useGeteventsQuery();
-  const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
+  // const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState<EventArticle>();
+  const [selectedArticle, setSelectedArticle] = useState<EventArticle | null>(
+    null
+  );
 
   const filteredEvents = useMemo(() => {
     if (!data?.data) return [];
@@ -89,12 +99,12 @@ export function UpcomingTable({
     return filtered;
   }, [data?.data, searchValue, statusFilter]);
 
-  const handleEditClick = (article: any) => {
+  const handleEditClick = (article: EventArticle) => {
     setSelectedArticle(article);
-    setUpdateDialogOpen(true);
+    // setUpdateDialogOpen(true);
   };
 
-  const handleDeleteClick = (article: any) => {
+  const handleDeleteClick = (article: EventArticle) => {
     setSelectedArticle(article);
     setDeleteDialogOpen(true);
   };
@@ -155,12 +165,12 @@ export function UpcomingTable({
             <div className="flex gap-2">
               {searchValue && (
                 <Badge variant="outline" className="text-xs">
-                  Search: "{searchValue}"
+                  {` Search: "${searchValue}"`}
                 </Badge>
               )}
               {statusFilter !== "all" && (
                 <Badge variant="outline" className="text-xs">
-                  Status: {statusFilter}
+                  {`Status: "${statusFilter}"`}
                 </Badge>
               )}
               <Badge variant="secondary">{Events.length} total</Badge>
@@ -272,7 +282,6 @@ export function UpcomingTable({
       /> */}
 
       <DeleteUpcomingDialog
-        //@ts-expect-error
         article={selectedArticle}
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}

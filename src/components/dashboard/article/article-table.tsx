@@ -1,7 +1,10 @@
 "use client";
 
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -10,15 +13,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle, Eye, Edit, Trash2 } from "lucide-react";
-import Image from "next/image";
 import { useGetArticlesQuery } from "@/services/article/aritcle-api";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle, Edit, Trash2 } from "lucide-react";
+import Image from "next/image";
 import { useMemo, useState } from "react";
-import { UpdateArticleDialog } from "./update-article-dialog";
 import { DeleteArticleDialog } from "./delete-article-dailog";
+import { UpdateArticleDialog } from "./update-article-dialog";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -32,6 +32,14 @@ const getStatusColor = (status: string) => {
       return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
   }
 };
+
+interface Article {
+  id: number;
+  Title: string;
+  status: string;
+  featured_image_url?: string | null;
+  date_updated?: string | null;
+}
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString("en-US", {
@@ -53,7 +61,7 @@ export function ArticleTable({
   const { data, error, isLoading } = useGetArticlesQuery();
   const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState<void>();
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   const filteredArticles = useMemo(() => {
     if (!data?.data) return [];
@@ -81,12 +89,12 @@ export function ArticleTable({
     return filtered;
   }, [data?.data, searchValue, statusFilter]);
 
-  const handleEditClick = (article: any) => {
+  const handleEditClick = (article: Article) => {
     setSelectedArticle(article);
     setUpdateDialogOpen(true);
   };
 
-  const handleDeleteClick = (article: any) => {
+  const handleDeleteClick = (article: Article) => {
     setSelectedArticle(article);
     setDeleteDialogOpen(true);
   };
@@ -147,12 +155,12 @@ export function ArticleTable({
             <div className="flex gap-2">
               {searchValue && (
                 <Badge variant="outline" className="text-xs">
-                  Search: "{searchValue}"
+                  {`Search: "${searchValue}"`}
                 </Badge>
               )}
               {statusFilter !== "all" && (
                 <Badge variant="outline" className="text-xs">
-                  Status: {statusFilter}
+                  {` Status: "${statusFilter}"`}
                 </Badge>
               )}
               <Badge variant="secondary">{articles.length} total</Badge>
@@ -259,7 +267,6 @@ export function ArticleTable({
       </Card>
 
       <UpdateArticleDialog
-        // @ts-expect-error
         article={selectedArticle}
         open={updateDialogOpen}
         onOpenChange={setUpdateDialogOpen}
@@ -267,7 +274,6 @@ export function ArticleTable({
       />
 
       <DeleteArticleDialog
-        // @ts-expect-error
         article={selectedArticle}
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}

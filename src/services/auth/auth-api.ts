@@ -19,7 +19,7 @@ export const authApi = createApi({
     whoIam: builder.query<ApiResponse, void>({
       query: () => "/users/me",
     }),
-    signIn: builder.mutation<void, void>({
+    signIn: builder.mutation<ApiResponse, { email: string; password: string }>({
       query: (auth) => ({
         url: "/auth/login",
         method: "POST",

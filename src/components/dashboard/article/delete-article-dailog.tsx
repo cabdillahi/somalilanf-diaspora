@@ -41,6 +41,7 @@ export function DeleteArticleDialog({
       onOpenChange(false);
       onSuccess?.();
     } catch (error) {
+      console.log(error);
       toast.error("Failed to delete article");
     }
   };
@@ -54,7 +55,7 @@ export function DeleteArticleDialog({
             Delete Article
           </DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete "{article?.Title}"? This action
+            Are you sure you want to delete {`"${article?.Title}"`}? This action
             cannot be undone.
           </DialogDescription>
         </DialogHeader>

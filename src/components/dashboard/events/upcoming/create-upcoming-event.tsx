@@ -2,18 +2,20 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useCreateeventMutation } from "@/services/event/event-api";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import Image from "next/image";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface EventDialogProps {
@@ -68,14 +70,16 @@ export function CreateUpcomingEvent({ open, onOpenChange }: EventDialogProps) {
     setIsSubmitting(true);
 
     try {
-      // @ts-expect-error
       await createEvent(formData).unwrap();
       toast.success("Event successfully created");
       onOpenChange(false);
       resetForm();
-    } catch (err: any) {
+    } catch (err) {
+      const error = err as FetchBaseQueryError & {
+        data?: { errors?: { message?: string }[] };
+      };
       const errorMessage =
-        err?.data?.errors?.[0]?.message || "Something went wrong";
+        error?.data?.errors?.[0]?.message || "Something went wrong";
       toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -190,7 +194,7 @@ export function CreateUpcomingEvent({ open, onOpenChange }: EventDialogProps) {
               onChange={handleImageUpload}
             />
             {preview && (
-              <img
+              <Image
                 src={preview || "/placeholder.svg"}
                 alt="Preview"
                 className="mt-2 h-32 w-full object-cover rounded-md"

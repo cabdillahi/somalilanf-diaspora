@@ -3,8 +3,13 @@ import { DashboardHeader } from "@/components/dashboard/home/dashboard-header";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { useWhoIamQuery } from "@/services/auth/auth-api";
 import { Loader2Icon } from "lucide-react";
+import type { ReactNode } from "react";
 
-export default function DashboardLayout({ children }: any) {
+interface DashboardLayoutProps {
+  children: ReactNode;
+}
+
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const { isLoading } = useWhoIamQuery();
 
   return (

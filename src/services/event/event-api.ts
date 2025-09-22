@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { url } from "@/url/url";
-import { EventResponse } from "../types/types";
+import { EventInput, EventResponse } from "../types/types";
 
 export const eventsApi = createApi({
   reducerPath: "event",
@@ -20,7 +20,7 @@ export const eventsApi = createApi({
       query: () => "/items/events",
       providesTags: ["event"],
     }),
-    createevent: builder.mutation<void, void>({
+    createevent: builder.mutation<EventResponse, EventInput>({
       query: (eventData) => ({
         url: "/items/events",
         method: "POST",

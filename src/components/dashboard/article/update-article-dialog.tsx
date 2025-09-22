@@ -45,7 +45,7 @@ export function UpdateArticleDialog({
 }: UpdateArticleDialogProps) {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
 
   const [updateArticle, { isLoading }] = useUpdateArticleMutation();
 
@@ -53,7 +53,7 @@ export function UpdateArticleDialog({
     if (article) {
       setTitle(article.Title || "");
       setStatus(article.status);
-      setImageUrl(article.featured_image_url || "");
+      // setImageUrl(article.featured_image_url || "");
     }
   }, [article]);
 
@@ -66,13 +66,13 @@ export function UpdateArticleDialog({
         id: article.id.toString(),
         data: {
           Title: title,
-          // @ts-expect-error
           status,
         },
       }).unwrap();
       onOpenChange(false);
       onSuccess?.();
     } catch (error) {
+      console.log(error);
       toast.error("Failed to update article");
     }
   };

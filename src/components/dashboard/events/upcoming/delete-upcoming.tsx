@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 interface Article {
   id: number;
-  Title: string;
+  title: string;
 }
 
 interface DeleteArticleDialogProps {
@@ -41,6 +41,7 @@ export function DeleteUpcomingDialog({
       onOpenChange(false);
       onSuccess?.();
     } catch (error) {
+      console.log(error);
       toast.error("Failed to delete article");
     }
   };
@@ -54,7 +55,7 @@ export function DeleteUpcomingDialog({
             Delete upcoming
           </DialogTitle>
           <DialogDescription>
-            {`Are you sure you want to delete "${article?.Title}"? This action cannot be undone.`}
+            {`Are you sure you want to delete "${article?.title}"? This action cannot be undone.`}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

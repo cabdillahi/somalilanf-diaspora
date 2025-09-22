@@ -37,7 +37,7 @@ export function LoginForm() {
   });
   const [apiError, setApiError] = useState("");
 
-  const [signIn, { isSuccess, isLoading, error, data }] = useSignInMutation();
+  const [signIn, { isSuccess, isLoading, data }] = useSignInMutation();
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,8 +108,7 @@ export function LoginForm() {
 
   useEffect(() => {
     if (isSuccess && data) {
-      //@ts-expect-error
-      const { access_token, refresh_token, expires } = data.data;
+      const { access_token, refresh_token, expires } = data?.data;
 
       //localStorage
       localStorage.setItem("access_token", access_token);
