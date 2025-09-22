@@ -1,25 +1,23 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
 
-// Define the structure for group data
 interface Group {
-  id: number
-  name: string
-  category: string
-  dateCreated: string
-  status: "Complete" | "Pending" | "Deny"
+  id: number;
+  name: string;
+  category: string;
+  dateCreated: string;
+  status: "Complete" | "Pending" | "Deny";
   members: Array<{
-    name: string
-    avatar: string
-  }>
-  logo: string
-  logoColor: string
+    name: string;
+    avatar: string;
+  }>;
+  logo: string;
+  logoColor: string;
 }
 
-// Sample data matching the dashboard design
 const groupsData: Group[] = [
   {
     id: 1,
@@ -127,36 +125,37 @@ const groupsData: Group[] = [
     logo: "🎭",
     logoColor: "bg-cyan-500",
   },
-]
+];
 
-// Helper function to get status badge styling
 function getStatusBadge(status: Group["status"]) {
   const styles = {
     Complete: "bg-blue-100 text-blue-800 hover:bg-blue-100",
     Pending: "bg-orange-100 text-orange-800 hover:bg-orange-100",
     Deny: "bg-red-100 text-red-800 hover:bg-red-100",
-  }
+  };
 
   return (
     <Badge variant="secondary" className={styles[status]}>
       {status}
     </Badge>
-  )
+  );
 }
 
 export function GroupsTable() {
   return (
     <Card className="bg-white shadow-sm border border-gray-200">
       <CardContent className="p-0">
-        {/* Table container with horizontal scroll on mobile */}
+        {/* Table container  on mobile */}
         <div className="overflow-x-auto">
           <table className="w-full">
             {/* Table header with proper styling */}
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                 Group&apos;s
+                  #
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Group&apos;s
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Date Created
@@ -176,7 +175,10 @@ export function GroupsTable() {
             {/* Table body with group data */}
             <tbody className="bg-white divide-y divide-gray-200">
               {groupsData.map((group) => (
-                <tr key={group.id} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={group.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
                   {/* Group logo with colorful background */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div
@@ -189,23 +191,37 @@ export function GroupsTable() {
                   {/* Group name and category */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div>
-                      <div className="text-sm font-medium text-gray-900">{group.name}</div>
-                      <div className="text-sm text-gray-500">{group.category}</div>
+                      <div className="text-sm font-medium text-gray-900">
+                        {group.name}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {group.category}
+                      </div>
                     </div>
                   </td>
 
                   {/* Creation date */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{group.dateCreated}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {group.dateCreated}
+                  </td>
 
                   {/* Status badge */}
-                  <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(group.status)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {getStatusBadge(group.status)}
+                  </td>
 
                   {/* Member avatars with overlap effect */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex -space-x-2">
                       {group.members.slice(0, 3).map((member, index) => (
-                        <Avatar key={index} className="w-8 h-8 border-2 border-white">
-                          <AvatarImage src={member.avatar || "/placeholder.svg"} alt={member.name} />
+                        <Avatar
+                          key={index}
+                          className="w-8 h-8 border-2 border-white"
+                        >
+                          <AvatarImage
+                            src={member.avatar || "/placeholder.svg"}
+                            alt={member.name}
+                          />
                           <AvatarFallback className="text-xs">
                             {member.name
                               .split(" ")
@@ -237,7 +253,9 @@ export function GroupsTable() {
         {/* Pagination controls */}
         <div className="px-6 py-4 border-t border-gray-200">
           <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-500">Showing 1 to 9 of 130 results</div>
+            <div className="text-sm text-gray-500">
+              Showing 1 to 9 of 130 results
+            </div>
 
             {/* Pagination buttons */}
             <div className="flex items-center space-x-2">
@@ -245,7 +263,11 @@ export function GroupsTable() {
                 <ChevronLeft className="h-4 w-4" />
               </Button>
 
-              <Button variant="outline" size="sm" className="bg-green-600 text-white hover:bg-green-700">
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-green-600 text-white hover:bg-green-700"
+              >
                 1
               </Button>
               <Button variant="outline" size="sm">
@@ -269,5 +291,5 @@ export function GroupsTable() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

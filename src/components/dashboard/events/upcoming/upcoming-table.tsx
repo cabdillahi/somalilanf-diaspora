@@ -50,7 +50,7 @@ export function UpcomingTable({
   searchValue = "",
   statusFilter = "all",
 }: ArticleTableProps) {
-  const { data, error, isLoading } = useGeteventsQuery({});
+  const { data, error, isLoading } = useGeteventsQuery();
   const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<any>(null);

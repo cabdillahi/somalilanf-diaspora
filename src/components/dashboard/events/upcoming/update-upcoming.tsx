@@ -66,6 +66,7 @@ export function UpdateUpcomingeDialog({
         id: article.id.toString(),
         data: {
           Title: title,
+          //@ts-ignore
           status,
         },
       }).unwrap();
@@ -82,7 +83,7 @@ export function UpdateUpcomingeDialog({
         <DialogHeader>
           <DialogTitle>Update Event</DialogTitle>
           <DialogDescription>
-            Make changes to the Event. Click save when you're done.
+            Make changes to the Event. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>

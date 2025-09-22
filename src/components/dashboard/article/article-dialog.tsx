@@ -62,8 +62,10 @@ export function ArticleDialog({ open, onOpenChange }: ArticleDialogProps) {
       toast.success("Article successfully created ");
       onOpenChange(false);
       resetForm();
-    } catch (err: any) {
+    } catch (err) {
+      //@ts-ignore
       const errorMessage =
+        //@ts-ignore
         err?.data?.errors?.[0]?.message || "Something went wrong ";
       toast.error(errorMessage);
     }

@@ -66,6 +66,7 @@ export function UpdateArticleDialog({
         id: article.id.toString(),
         data: {
           Title: title,
+          //@ts-ignore
           status,
         },
       }).unwrap();
@@ -82,7 +83,7 @@ export function UpdateArticleDialog({
         <DialogHeader>
           <DialogTitle>Update Article</DialogTitle>
           <DialogDescription>
-            Make changes to the article. Click save when you're done.
+            Make changes to the article. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>

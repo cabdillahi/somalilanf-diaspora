@@ -4,7 +4,7 @@ import { SearchFilterUpcoming } from "@/components/dashboard/events/upcoming/sea
 import { UpcomingTable } from "@/components/dashboard/events/upcoming/upcoming-table";
 import { useCallback, useState } from "react";
 
-export default function eventssPage() {
+export default function EventsPage() {
   const [searchValue, setSearchValue] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 

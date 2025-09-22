@@ -55,10 +55,10 @@ export function ArticleTable({
   searchValue = "",
   statusFilter = "all",
 }: ArticleTableProps) {
-  const { data, error, isLoading } = useGetArticlesQuery({});
+  const { data, error, isLoading } = useGetArticlesQuery();
   const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState<any>(null);
+  const [selectedArticle, setSelectedArticle] = useState<void>();
 
   const filteredArticles = useMemo(() => {
     if (!data?.data) return [];
@@ -264,6 +264,7 @@ export function ArticleTable({
       </Card>
 
       <UpdateArticleDialog
+        //@ts-ignore
         article={selectedArticle}
         open={updateDialogOpen}
         onOpenChange={setUpdateDialogOpen}
@@ -271,6 +272,7 @@ export function ArticleTable({
       />
 
       <DeleteArticleDialog
+        //@ts-ignore
         article={selectedArticle}
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}

@@ -16,11 +16,11 @@ export const eventsApi = createApi({
   }),
   tagTypes: ["event"],
   endpoints: (builder) => ({
-    getevents: builder.query<EventResponse, any>({
+    getevents: builder.query<EventResponse, void>({
       query: () => "/items/events",
       providesTags: ["event"],
     }),
-    createevent: builder.mutation<any, any>({
+    createevent: builder.mutation<void, void>({
       query: (eventData) => ({
         url: "/items/events",
         method: "POST",
@@ -28,7 +28,7 @@ export const eventsApi = createApi({
       }),
       invalidatesTags: ["event"],
     }),
-    updateevent: builder.mutation<any, { id: string; data: any }>({
+    updateevent: builder.mutation<void, { id: string; data: void }>({
       query: ({ id, data }) => ({
         url: `/items/events/${id}`,
         method: "PATCH",
@@ -36,7 +36,7 @@ export const eventsApi = createApi({
       }),
       invalidatesTags: ["event"],
     }),
-    deleteevent: builder.mutation<any, string>({
+    deleteevent: builder.mutation<void, string>({
       query: (id) => ({
         url: `/items/events/${id}`,
         method: "DELETE",

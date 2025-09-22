@@ -11,7 +11,7 @@ export default function Upcoming() {
         <UpcomingTable />
         <footer className="mt-8 text-center text-sm text-muted-foreground">
           2025© Somaliland Diaspora Engagement Platform. Design & Develop by
-          Tijgal Solutions
+          Tiigsi Solutions
         </footer>
       </div>
     </div>

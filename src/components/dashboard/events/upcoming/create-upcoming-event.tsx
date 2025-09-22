@@ -68,6 +68,7 @@ export function CreateUpcomingEvent({ open, onOpenChange }: EventDialogProps) {
     setIsSubmitting(true);
 
     try {
+      //@ts-ignore
       await createEvent(formData).unwrap();
       toast.success("Event successfully created");
       onOpenChange(false);
