@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ArticleResponse } from "../types/types";
+import { ArticleResponse, Article } from "../types/types"; // hubi inaad haysato `Article` interface
 import { url } from "@/url/url";
 
 export const articlesApi = createApi({
@@ -16,11 +16,14 @@ export const articlesApi = createApi({
   }),
   tagTypes: ["Article"],
   endpoints: (builder) => ({
-    getArticles: builder.query<ArticleResponse, any>({
+    // ✅ getArticles
+    getArticles: builder.query<ArticleResponse, void>({
       query: () => "/items/articles",
       providesTags: ["Article"],
     }),
-    createArticle: builder.mutation<any, any>({
+
+    // ✅ createArticle
+    createArticle: builder.mutation<Article, Partial<Article>>({
       query: (articleData) => ({
         url: "/items/articles",
         method: "POST",
@@ -28,7 +31,9 @@ export const articlesApi = createApi({
       }),
       invalidatesTags: ["Article"],
     }),
-    updateArticle: builder.mutation<any, { id: string; data: any }>({
+
+    // ✅ updateArticle
+    updateArticle: builder.mutation<Article, { id: string; data: Partial<Article> }>({
       query: ({ id, data }) => ({
         url: `/items/articles/${id}`,
         method: "PATCH",
@@ -36,7 +41,9 @@ export const articlesApi = createApi({
       }),
       invalidatesTags: ["Article"],
     }),
-    deleteArticle: builder.mutation<any, string>({
+
+    // ✅ deleteArticle
+    deleteArticle: builder.mutation<{ success: boolean; id: string }, string>({
       query: (id) => ({
         url: `/items/articles/${id}`,
         method: "DELETE",
