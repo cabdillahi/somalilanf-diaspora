@@ -1,36 +1,36 @@
 import { ActivityFeed } from "@/components/dashboard/home/activity-feed";
-import { GroupsAnalytics } from "@/components/dashboard/home/groups-analytics";
-import { PopularArticles } from "@/components/dashboard/home/popular-articles";
-import { StatsCards } from "@/components/dashboard/home/stats-cards";
-import { UpcomingEvents } from "@/components/dashboard/home/upcoming-events";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Somaliland Diaspora | Dashboard",
-  description: "Somaliland Diaspora Engagement Platform.",
-};
+import { AnalyticsCharts } from "@/components/dashboard/home/analytics-charts";
+import { ArticlesSection } from "@/components/dashboard/home/articles-section";
+import { EventsSection } from "@/components/dashboard/home/events-section";
+import { KpiCards } from "@/components/dashboard/home/kpi-cards";
+import { WelcomeSection } from "@/components/dashboard/home/welcome-section";
 
 export default function DashboardPage() {
   return (
-    <div className="flex flex-col h-screen w-full overflow-y-scroll scrollHidden  ">
-      <main className="flex-1 space-y-6 p-6 ">
-        {/* Welcome Section & Stats */}
-        <StatsCards />
-
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Column - Activity Feed */}
+    <div className="min-h-screen bg-background">
+      <main className="container mx-auto px-4 py-6 space-y-6">
+        {/* Welcome and KPI Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-1">
+            <WelcomeSection />
+          </div>
+          <div className="lg:col-span-3">
+            <KpiCards />
+          </div>
+        </div>
+
+        {/* Main Content Grid - Responsive Layout */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          {/* Left Column - Activity Feed and Events */}
+          <div className="xl:col-span-1 space-y-6">
             <ActivityFeed />
-            <div className="mt-6">
-              <UpcomingEvents />
-            </div>
+            <EventsSection />
           </div>
 
-          {/* Right Column - Analytics & Articles */}
-          <div className="lg:col-span-2 space-y-6">
-            <GroupsAnalytics />
-            <PopularArticles />
+          {/* Right Columns - Charts and Articles */}
+          <div className="xl:col-span-2 space-y-6">
+            <AnalyticsCharts />
+            <ArticlesSection />
           </div>
         </div>
       </main>

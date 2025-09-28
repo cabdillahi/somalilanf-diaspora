@@ -1,10 +1,21 @@
 "use client";
 
+import {
+  Bell,
+  Calendar,
+  Circle,
+  ClipboardMinus,
+  FileText,
+  Fingerprint,
+  Heart,
+  Home,
+  NotebookText,
+  Settings,
+  Users,
+} from "lucide-react";
 import { useState } from "react";
-import { Home, Users, FileText, BookOpen, Calendar, Heart } from "lucide-react";
-import { SidebarItem } from "./sidebar-item";
 import { CollapsibleSection } from "./collapsible-section";
-
+import { SidebarItem } from "./sidebar-item";
 interface SidebarNavigationProps {
   onItemClick?: () => void;
 }
@@ -41,13 +52,6 @@ export function SidebarNavigation({ onItemClick }: SidebarNavigationProps) {
           </h3>
           <div className="space-y-1">
             <SidebarItem
-              icon={<FileText />}
-              label="Articles"
-              isActive={activeItem === "articles"}
-              href={"/dashboard/articles"}
-              onClick={() => handleItemClick("articles")}
-            />
-            <SidebarItem
               icon={<Users />}
               label="Groups"
               href={"/dashboard/groups"}
@@ -55,7 +59,14 @@ export function SidebarNavigation({ onItemClick }: SidebarNavigationProps) {
               onClick={() => handleItemClick("groups")}
             />
             <SidebarItem
-              icon={<BookOpen />}
+              icon={<FileText />}
+              label="Articles"
+              isActive={activeItem === "articles"}
+              href={"/dashboard/articles"}
+              onClick={() => handleItemClick("articles")}
+            />
+            <SidebarItem
+              icon={<NotebookText />}
               label="Resources"
               isActive={activeItem === "resources"}
               onClick={() => handleItemClick("resources")}
@@ -129,6 +140,132 @@ export function SidebarNavigation({ onItemClick }: SidebarNavigationProps) {
                 label="Volunteer Programs"
                 isActive={activeItem === "volunteer-programs"}
                 onClick={() => handleItemClick("volunteer-programs")}
+              />
+            </CollapsibleSection>
+          </div>
+        </div>
+        <div className="mb-6">
+          <h3 className="px-4 py-2 text-xs font-medium text-green-200 uppercase tracking-wider">
+            Communication
+          </h3>
+          <div className="space-y-1">
+            <CollapsibleSection
+              icon={<Calendar />}
+              label="Announcements"
+              defaultOpen={false}
+            >
+              <SidebarItem
+                icon={
+                  <div className="w-2 h-2 bg-green-300 rounded-full transition-all duration-300 ease-in-out hover:scale-125" />
+                }
+                label="Announcements"
+                href={"#"}
+                // isActive={activeItem === "upcoming-events"}
+                // onClick={() => handleItemClick("upcoming-events")}
+              />
+            </CollapsibleSection>
+            <CollapsibleSection
+              icon={<Bell />}
+              label="Notifications"
+              defaultOpen={false}
+            >
+              <SidebarItem
+                icon={
+                  <div className="w-2 h-2 bg-green-300 rounded-full transition-all duration-300 ease-in-out hover:scale-125" />
+                }
+                label="Notifications"
+                href={"#"}
+                // isActive={activeItem === "upcoming-events"}
+                // onClick={() => handleItemClick("upcoming-events")}
+              />
+            </CollapsibleSection>
+          </div>
+        </div>
+        <div className="mb-6">
+          <h3 className="px-4 py-2 text-xs font-medium text-green-200 uppercase tracking-wider">
+            Analytics & Reports
+          </h3>
+          <div className="space-y-1">
+            <CollapsibleSection
+              icon={<Circle />}
+              label="User Insights"
+              defaultOpen={false}
+            >
+              <SidebarItem
+                icon={
+                  <div className="w-2 h-2 hidden bg-green-300 rounded-full transition-all duration-300 ease-in-out hover:scale-125" />
+                }
+                label=""
+                href={"#"}
+                // isActive={activeItem === "upcoming-events"}
+                // onClick={() => handleItemClick("upcoming-events")}
+              />
+            </CollapsibleSection>
+            <CollapsibleSection
+              icon={<Users />}
+              label="Group Engagement"
+              defaultOpen={false}
+            >
+              <SidebarItem
+                icon={
+                  <div className="w-2 h-2 hidden bg-green-300 rounded-full transition-all duration-300 ease-in-out hover:scale-125" />
+                }
+                label=""
+                href={"#"}
+                // isActive={activeItem === "upcoming-events"}
+                // onClick={() => handleItemClick("upcoming-events")}
+              />
+            </CollapsibleSection>
+            <CollapsibleSection
+              icon={<ClipboardMinus />}
+              label="Event Reports"
+              defaultOpen={false}
+            >
+              <SidebarItem
+                icon={
+                  <div className="w-2 h-2 hidden bg-green-300 rounded-full transition-all duration-300 ease-in-out hover:scale-125" />
+                }
+                label=""
+                href={"#"}
+                // isActive={activeItem === "upcoming-events"}
+                // onClick={() => handleItemClick("upcoming-events")}
+              />
+            </CollapsibleSection>
+          </div>
+        </div>
+        <div className="mb-6">
+          <h3 className="px-4 py-2 text-xs font-medium text-green-200 uppercase tracking-wider">
+            System & Security
+          </h3>
+          <div className="space-y-1">
+            <CollapsibleSection
+              icon={<Settings />}
+              label="Settings"
+              defaultOpen={false}
+            >
+              <SidebarItem
+                icon={
+                  <div className="w-2 h-2 hidden bg-green-300 rounded-full transition-all duration-300 ease-in-out hover:scale-125" />
+                }
+                label=""
+                href={"#"}
+                // isActive={activeItem === "upcoming-events"}
+                // onClick={() => handleItemClick("upcoming-events")}
+              />
+            </CollapsibleSection>
+            <CollapsibleSection
+              icon={<Fingerprint />}
+              label="Security "
+              defaultOpen={false}
+            >
+              <SidebarItem
+                icon={
+                  <div className="w-2 h-2 hidden bg-green-300 rounded-full transition-all duration-300 ease-in-out hover:scale-125" />
+                }
+                label=""
+                href={"#"}
+                // isActive={activeItem === "upcoming-events"}
+                // onClick={() => handleItemClick("upcoming-events")}
               />
             </CollapsibleSection>
           </div>

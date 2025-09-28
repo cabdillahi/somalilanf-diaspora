@@ -135,13 +135,7 @@ export function ArticleDialog({ open, onOpenChange }: ArticleDialogProps) {
               accept="image/*"
               onChange={handleImageUpload}
             />
-            {preview && (
-              <Image
-                src={preview}
-                alt="Preview"
-                className="mt-2 h-32 w-full object-cover rounded-md"
-              />
-            )}
+            
           </div>
 
           {/* Action Buttons */}

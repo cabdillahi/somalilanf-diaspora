@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateeventMutation } from "@/services/event/event-api";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -42,7 +41,7 @@ export function CreateUpcomingEvent({ open, onOpenChange }: EventDialogProps) {
     image: "",
   });
 
-  const [preview, setPreview] = useState<string | null>(null);
+  const [_, setPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [createEvent] = useCreateeventMutation();
@@ -193,13 +192,13 @@ export function CreateUpcomingEvent({ open, onOpenChange }: EventDialogProps) {
               accept="image/*"
               onChange={handleImageUpload}
             />
-            {preview && (
+            {/* {preview && (
               <Image
                 src={preview || "/placeholder.svg"}
                 alt="Preview"
                 className="mt-2 h-32 w-full object-cover rounded-md"
               />
-            )}
+            )} */}
           </div>
 
           {/* Action Buttons */}
